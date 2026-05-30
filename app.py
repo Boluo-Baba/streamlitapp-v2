@@ -463,11 +463,6 @@ if button1:
             
             st.markdown(f"**Input vertex: X={input_x} mm, Y={input_y} mm (mode: pupil_div2, actual center: {a.input_x}, {a.input_y})**")
             
-            st.dataframe(pd.DataFrame({'index P': [str(round(a.eoz_percent, 6))], 'index D/mm': [str(round(a.incircle_diatance, 6))],
-                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['index P']).applymap(color_survived_deoz, subset=['index D/mm']),
-                         use_container_width=False,
-                         hide_index=True)
-
             st.markdown(
                 '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
                 unsafe_allow_html=True
@@ -483,11 +478,6 @@ if button1:
                 html += "</tr>"
             html += "</table>"
             st.markdown(html, unsafe_allow_html=True)
-
-            st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D > 1.0975mm. Personalized area is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
-                    unsafe_allow_html=True
-            )
     
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
@@ -521,11 +511,6 @@ elif example:
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
             st.markdown(f"**Input vertex: X={input_x} mm, Y={input_y} mm (mode: pupil_div2, actual center: {a.input_x}, {a.input_y})**")
-            
-            st.dataframe(pd.DataFrame({'index P': [str(round(a.eoz_percent, 6))], 'index D/mm': [str(round(a.incircle_diatance, 6))],
-                                       'Dmin': [str(round(a.min_distance, 6))]}).style.applymap(color_survived_eoz, subset=['index P']).applymap(color_survived_deoz, subset=['index D/mm']),
-                         use_container_width=False,
-                         hide_index=True)
 
             st.markdown(
                 '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
@@ -542,11 +527,6 @@ elif example:
                 html += "</tr>"
             html += "</table>"
             st.markdown(html, unsafe_allow_html=True)
-
-            st.markdown(
-                    '<p style="color:gray; font-weight:bold; font-size:20px;">Personalized area is decentered when index P < 0.9502 or index D > 1.0975mm. Personalized area is centered when index P > 0.9502 and index D < 1.0975mm.</p>',
-                    unsafe_allow_html=True
-            )
     
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
