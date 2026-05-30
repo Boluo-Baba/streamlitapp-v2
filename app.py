@@ -422,12 +422,12 @@ with st.sidebar:
     file = st.file_uploader("**Upload your corneal topography (.csv) file**", type=["csv", "CSV"])
     
     # 顶点数据输入
-    st.markdown("**Vertex data (pupil)**")
+    st.markdown("**Pupil center**")
     col_x, col_y = st.columns(2)
     with col_x:
-        input_x = st.number_input("X (mm)", value=0.0, step=0.1, format="%.1f")
+        input_x = st.number_input("X (mm)", value=0.0, step=0.01, format="%.2f")
     with col_y:
-        input_y = st.number_input("Y (mm)", value=0.0, step=0.1, format="%.1f")
+        input_y = st.number_input("Y (mm)", value=0.0, step=0.01, format="%.2f")
     
     mode = {
         'circle center': 'pupil_div2',
@@ -468,17 +468,12 @@ if button1:
                          use_container_width=False,
                          hide_index=True)
 
-            if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
-                st.markdown(
-                    '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
-                    unsafe_allow_html=True
-                )
-                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                               'C': ['', "✅"]})
-            else:
-                st.markdown("**Personalized area is centered! Default K values from smoothed corneal topography is recommanded!**")
-                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                               'C': ["✅", '']})
+            st.markdown(
+                '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
+                unsafe_allow_html=True
+            )
+            df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
+                           'C': ['', "✅"]})
                 
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
@@ -532,17 +527,12 @@ elif example:
                          use_container_width=False,
                          hide_index=True)
 
-            if a.eoz_percent < 0.9502 or a.incircle_diatance > 1.0975:
-                st.markdown(
-                    '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
-                    unsafe_allow_html=True
-                )
-                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                               'C': ['', "✅"]})
-            else:
-                st.markdown("**Personalized area is centered! Default K values from smoothed corneal topography is recommanded!**")
-                df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                               'C': ["✅", '']})
+            st.markdown(
+                '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
+                unsafe_allow_html=True
+            )
+            df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
+                           'C': ['', "✅"]})
                 
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
