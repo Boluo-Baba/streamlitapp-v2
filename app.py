@@ -463,12 +463,8 @@ if button1:
             
             st.markdown(f"**Input vertex: X={input_x} mm, Y={input_y} mm (mode: pupil_div2, actual center: {a.input_x}, {a.input_y})**")
             
-            st.markdown(
-                '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
-                unsafe_allow_html=True
-            )
-            df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                           'C': ['', "✅"]})
+            df = pd.DataFrame({'A': ['ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
+                           'C': ["✅"]})
                 
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
@@ -512,12 +508,8 @@ elif example:
             
             st.markdown(f"**Input vertex: X={input_x} mm, Y={input_y} mm (mode: pupil_div2, actual center: {a.input_x}, {a.input_y})**")
 
-            st.markdown(
-                '<p style="color:black; font-weight:bold; font-size:30px;">Personalized area is decentered! K values reported by ablation guided K measurements is recommanded!</p>',
-                unsafe_allow_html=True
-            )
-            df = pd.DataFrame({'A': ['Default', 'ablation guided K measurements'], 'B': [f'K1: {r2[3]}D @ {r2[2]}° / K2: {r2[1]}D @ {r2[0]}°', f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                           'C': ['', "✅"]})
+            df = pd.DataFrame({'A': ['ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
+                           'C': ["✅"]})
                 
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
