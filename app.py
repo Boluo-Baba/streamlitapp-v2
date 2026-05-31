@@ -379,7 +379,7 @@ def plot(a):
 
 
 # UI部分
-title = "Ablation Guided K Measurements"
+title = "Ablation Guided K Measurements - Midpoint Strategy"
 
 def color_survived(val, thres, type):
     if type == 'small':
@@ -461,10 +461,10 @@ if button1:
             r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
-            st.markdown(f"**Input vertex: X={input_x} mm, Y={input_y} mm (mode: pupil_div2, actual center: {a.input_x}, {a.input_y})**")
-            
-            df = pd.DataFrame({'A': ['ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                           'C': ["✅"]})
+            st.markdown(f"**K1: {r1[3]}D @ {r1[2]}°**")
+            st.markdown(f"**K2: {r1[1]}D @ {r1[0]}°**")
+
+            df = pd.DataFrame({'A': ['Pupil center', 'Input', 'Actually used'], 'B': ['X', input_x, a.input_x], 'C': ['Y', input_y, a.input_y]})
                 
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
@@ -474,7 +474,7 @@ if button1:
                 html += "</tr>"
             html += "</table>"
             st.markdown(html, unsafe_allow_html=True)
-    
+                
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
@@ -506,10 +506,10 @@ elif example:
             r1 = [round(i, 6) for i in [a.two_point_angle, a.two_point_mean_max, a.two_point_pend_angle, a.two_point_pend_mean]]
             r2 = [round(i, 6) for i in [a.ring_angle, a.ring_mean_max, a.ring_pend_angle, a.ring_pend_mean]]
             
-            st.markdown(f"**Input vertex: X={input_x} mm, Y={input_y} mm (mode: pupil_div2, actual center: {a.input_x}, {a.input_y})**")
+            st.markdown(f"**K1: {r1[3]}D @ {r1[2]}°**")
+            st.markdown(f"**K2: {r1[1]}D @ {r1[0]}°**")
 
-            df = pd.DataFrame({'A': ['ablation guided K measurements'], 'B': [f'K1: {r1[3]}D @ {r1[2]}° / K2: {r1[1]}D @ {r1[0]}°'],
-                           'C': ["✅"]})
+            df = pd.DataFrame({'A': ['Pupil center', 'Input', 'Actually used'], 'B': ['X', input_x, a.input_x], 'C': ['Y', input_y, a.input_y]})
                 
             html = "<table style='border-collapse: collapse;'>"
             for row in df.values:
