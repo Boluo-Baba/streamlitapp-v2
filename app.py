@@ -77,7 +77,8 @@ class Patient:
         self.two_point_zone_for_plot = self.df_overlap.copy()
         self.find_two_point_max()
         
-        self.df_midpoint_centered_circle_for_plot = self.df_133std.copy()
+        self.df_midpoint_centered_circle_for_plot = self.smooth_data.copy()
+        self.prepare_midpoint_centered_circle_for_plot()
 
         self.ring_overlap = self.df_133std.copy()
         self.ring_edge = pd.DataFrame()
@@ -365,6 +366,12 @@ class Patient:
             return zone_sum / zone_n
         else:
             return 0
+        
+    def prepare_midpoint_centered_circle_for_plot(self):
+        for i in range(self.x_len):
+            for j in range(self.y_len):
+                if (i, j) not in self.point_list:
+                    self.df_midpoint_centered_circle_for_plot.iloc[i, j] = np.nan
 
 colors_list = ['#A2FAFF','#02EFFF','#00C8FE','#008CFF','#0000FD','#0001B3','#003198','#0001B4','#003294','#00627A',
                '#055F57','#006F00','#009A00','#00AB00','#46ED00','#BBFF00','#FFFE00','#FFC404','#F89900','#FB6302',
