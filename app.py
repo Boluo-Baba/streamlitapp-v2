@@ -372,6 +372,22 @@ class Patient:
             for j in range(self.y_len):
                 if (i, j) not in self.point_list:
                     self.df_midpoint_centered_circle_for_plot.iloc[i, j] = np.nan
+        
+        # 画圆心：以输入x,y为中心，3x3黑色方块（47近似黑色）
+        cx = self.input_x_index
+        cy = self.input_y_index
+        for i in range(cx - 1, cx + 2):
+            for j in range(cy - 1, cy + 2):
+                if 0 <= i < self.x_len and 0 <= j < self.y_len:
+                    self.df_midpoint_centered_circle_for_plot.iloc[i, j] = 47
+        
+        # 画圆：以输入x,y为圆心，r0为直径
+        r_pixels = self.r0 * 5
+        for di, dj in self.circle_edge(r_pixels):
+            i = cx + di
+            j = cy + dj
+            if 0 <= i < self.x_len and 0 <= j < self.y_len:
+                self.df_midpoint_centered_circle_for_plot.iloc[i, j] = 47
 
 colors_list = ['#A2FAFF','#02EFFF','#00C8FE','#008CFF','#0000FD','#0001B3','#003198','#0001B4','#003294','#00627A',
                '#055F57','#006F00','#009A00','#00AB00','#46ED00','#BBFF00','#FFFE00','#FFC404','#F89900','#FB6302',
