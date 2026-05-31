@@ -533,22 +533,12 @@ if button1:
                 html += "</tr>"
             html += "</table>"
             st.markdown(html, unsafe_allow_html=True)
-                
+            
+            st.markdown(f"**Ablation area (mm2): {round(a.area_133std, 6)}**")
+
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
-
-    df = pd.DataFrame({'A': ['Input vertex X (mm)', 'Input vertex Y (mm)', 'Actual circle center X', 'Actual circle center Y', 'Center of max inscribed circle', 'Ablation area (mm2)'], 
-                        'B': [str(input_x), str(input_y), str(a.input_x), str(a.input_y), '(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')', str(round(a.area_133std, 6))]})
-    with st.expander("**Key Intermediate Variables**", True):
-        html = "<table style='border-collapse: collapse;'>"
-        for row in df.values:
-            html += "<tr>"
-            for val in row:
-                html += f"<td style='border:1px solid #ddd; padding:4px 8px;'>{val}</td>"
-            html += "</tr>"
-        html += "</table>"
-        st.markdown(html, unsafe_allow_html=True)
             
 elif example:
     with st.sidebar:
@@ -578,22 +568,12 @@ elif example:
                 html += "</tr>"
             html += "</table>"
             st.markdown(html, unsafe_allow_html=True)
+
+            st.markdown(f"**Ablation area (mm2): {round(a.area_133std, 6)}**")
     
     with st.expander("**Figures**", True):
         with st.spinner("Wait for it...", show_time=True):
             plot(a)
-
-    df = pd.DataFrame({'A': ['Input vertex X (mm)', 'Input vertex Y (mm)', 'Actual circle center X', 'Actual circle center Y', 'Center of max inscribed circle', 'Ablation area (mm2)'], 
-                        'B': [str(input_x), str(input_y), str(a.input_x), str(a.input_y), '(' + a.incircle_position[0] + ', ' + a.incircle_position[1] + ')', str(round(a.area_133std, 6))]})
-    with st.expander("**Key Intermediate Variables**", True):
-        html = "<table style='border-collapse: collapse;'>"
-        for row in df.values:
-            html += "<tr>"
-            for val in row:
-                html += f"<td style='border:1px solid #ddd; padding:4px 8px;'>{val}</td>"
-            html += "</tr>"
-        html += "</table>"
-        st.markdown(html, unsafe_allow_html=True)
 
 else:
     with st.expander("**Calculate result**", True):
