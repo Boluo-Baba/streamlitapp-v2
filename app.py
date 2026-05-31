@@ -77,6 +77,8 @@ class Patient:
         self.two_point_zone_for_plot = self.df_overlap.copy()
         self.find_two_point_max()
         
+        self.df_midpoint_centered_circle_for_plot = self.df_133std.copy()
+
         self.ring_overlap = self.df_133std.copy()
         self.ring_edge = pd.DataFrame()
         self.ring_para_df = pd.DataFrame()
@@ -394,12 +396,12 @@ def plot(a):
     col1[1].pyplot(fig, use_container_width=True)
     
     fig = plt.figure(dpi=300)
-    plt.imshow(a.df_incircle.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
+    plt.imshow(a.df_midpoint_centered_circle_for_plot.iloc[10: -9, 8: -10], cmap=cmap, interpolation='nearest', vmin=32, vmax=47,)
     plt.xticks(np.arange(0,121,20), np.arange(-6, 7, 2))
     plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Personalized area, max inscribed circle and its center")
+    plt.title("Personalized area, and midpoint-centered circle")
     col2[0].pyplot(fig, use_container_width=True)
     
     fig = plt.figure(dpi=300)
