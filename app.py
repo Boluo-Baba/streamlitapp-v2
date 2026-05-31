@@ -241,6 +241,8 @@ class Patient:
             self.two_point_pend_angle = self.two_point_angle + 90
         else:
             self.two_point_pend_angle = self.two_point_angle - 90
+        self.two_point_zone_mean = self.zone_cal(point1, point2, True)
+        self.two_point_pend_zone_mean = self.zone_cal(pend_point1, pend_point2, True)
     
     def find_ring_max(self):
         for i in range(self.x_len):
@@ -329,6 +331,38 @@ class Patient:
                         i ** 2 + (j - 1) ** 2 > r ** 2 or i ** 2 + (j + 1) ** 2 > r ** 2:
                         circle_edge_list += [(i, j)]
         return circle_edge_list
+    
+    def zone_cal(self, point1_, point2_, plot=False):
+        zone_sum = 0
+        zone_n = 0
+        count = 0
+        k = (point1_[0] - point2_[0]) / (point1_[1] - point2_[1]) if point1_[1] - point2_[1] != 0 else np.inf        
+        if abs(k) <= 1:
+            for i in range(self.y_len):
+                j = round(k * (i - self.y_zero_index) + self.x_zero_index)
+                if j <= max(point1_[0], point2_[0]) and j >= min(point1_[0], point2_[0]):
+                    if i <= max(point1_[1], point2_[1]) and i >= min(point1_[1], point2_[1]):
+                        if plot:
+#                             if count % 3 != 0:
+                            self.two_point_zone_for_plot.iloc[j, i] = np.nan
+                            count += 1
+                        zone_sum += self.data.iloc[j, i]
+                        zone_n += 1
+        if abs(k) > 1:
+            for i in range(self.x_len):
+                j = round(1 / k * (i - self.x_zero_index) + self.y_zero_index)
+                if j <= max(point1_[1], point2_[1]) and j >= min(point1_[1], point2_[1]):
+                    if i <= max(point1_[0], point2_[0]) and i >= min(point1_[0], point2_[0]):
+                        if plot:
+#                             if count % 3 != 0:
+                            self.two_point_zone_for_plot.iloc[i, j] = np.nan
+                            count += 1
+                        zone_sum += self.data.iloc[i, j]
+                        zone_n += 1
+        if zone_n != 0:
+            return zone_sum / zone_n
+        else:
+            return 0
 
 colors_list = ['#A2FAFF','#02EFFF','#00C8FE','#008CFF','#0000FD','#0001B3','#003198','#0001B4','#003294','#00627A',
                '#055F57','#006F00','#009A00','#00AB00','#46ED00','#BBFF00','#FFFE00','#FFC404','#F89900','#FB6302',
@@ -374,7 +408,7 @@ def plot(a):
     plt.yticks(np.arange(0,121,20), np.arange(6, -7, -2))
     plt.grid(True, color='grey', linestyle='--', alpha=0.5)
     plt.colorbar()
-    plt.title("Mergring personalized area, K1 and K2")
+    plt.title("Overlapping personalized area, K1 and K2")
     col2[1].pyplot(fig, use_container_width=True)
 
 
